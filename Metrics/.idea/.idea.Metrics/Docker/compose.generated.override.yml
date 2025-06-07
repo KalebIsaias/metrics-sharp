@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.8"
+services:
+  aspnetcore-app:
+    build:
+      context: "/home/isaias/Dev/estudos/metrics-sharp/Metrics"
+      dockerfile: "Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/Metrics.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "metrics:dev"
+    ports: []
+    volumes:
+    - "/home/isaias/Dev/estudos/metrics-sharp/Metrics:/app:rw"
+    - "/home/isaias/Dev/estudos/metrics-sharp/Metrics:/src:rw"
+    - "/home/isaias/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
