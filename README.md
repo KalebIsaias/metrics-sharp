@@ -1,27 +1,27 @@
 # metrics-sharp
 
-Este projeto expõe métricas de uma aplicação ASP.NET Core e visualiza em dashboards do Grafana, usando Prometheus para coleta.
+Este projeto expÃµe mÃ©tricas de uma aplicaÃ§Ã£o ASP.NET Core e visualiza em dashboards do Grafana, usando Prometheus para coleta.
 
-## Serviços
+## ServiÃ§os
 
 * Aplicativo ASP.NET Core na porta 8080
 * Prometheus na porta 9090
 * Grafana na porta 3000
 
-## Execução
+## ExecuÃ§Ã£o
 
-1. Clone o repositório
+1. Clone o repositÃ³rio
 2. Execute `docker-compose up --build`
 3. Acesse:
 
    * Aplicativo: [http://localhost:8080](http://localhost:8080)
    * Prometheus: [http://localhost:9090](http://localhost:9090)
-   * Grafana: [http://localhost:3000](http://localhost:3000) (login padrão: admin / admin)
+   * Grafana: [http://localhost:3000](http://localhost:3000) (login padrÃ£o: admin / admin)
 
 ## ASP.NET Core
 
-* Endpoint de métricas: `/metrics`
-* Métricas expostas:
+* Endpoint de mÃ©tricas: `/metrics`
+* MÃ©tricas expostas:
 
   * Counter: `metrics_requisicoes_total` (por rota)
   * Gauge: `metrics_valor_aleatorio`
@@ -48,17 +48,17 @@ scrape_configs:
 
 ## Queries no Grafana
 
-* Taxa de Requisições por Segundo:
+* Taxa de RequisiÃ§Ãµes por Segundo:
 
   ```
   sum(rate(http_server_request_duration_seconds_count[1m]))
   ```
-* Latência P95:
+* LatÃªncia P95:
 
   ```
   histogram_quantile(0.95, sum by (le) (rate(http_server_request_duration_seconds_bucket[1m])))
   ```
-* Requisições por rota:
+* RequisiÃ§Ãµes por rota:
 
   ```
   sum by (rota) (metrics_requisicoes_total)
@@ -71,13 +71,14 @@ scrape_configs:
 
 ## Dashboard
 
-Gráficos criados:
+GrÃ¡ficos criados:
 
-* Valor do Gauge Aleatório
-* Taxa de Requisições por Segundo
-* Requisições por Rota
-* Latência P95 (ms)
+* Valor do Gauge AleatÃ³rio
+* Taxa de RequisiÃ§Ãµes por Segundo
+* RequisiÃ§Ãµes por Rota
+* LatÃªncia P95 (ms)
 
-Exemplo:
+Print legal do grafana:
+![Captura de tela 2025-06-08 145418](https://github.com/user-attachments/assets/cb8c1ee5-2edc-4cbe-a737-7b19f269f0a3)
 
 
